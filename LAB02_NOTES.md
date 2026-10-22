@@ -10,3 +10,7 @@ The starting project is the uploaded VerticalSlice-Edma template with Api, Appli
 ## Request path
 
 The HTTP request enters Api, calls the Application handler, uses the Infrastructure database context, and reads Domain entities.
+
+## Debugger setup
+
+Open VerticalSlice.slnx, select Api as the startup project, and launch the debugger with F5.
