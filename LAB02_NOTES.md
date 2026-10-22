@@ -42,3 +42,7 @@ Use GET /api/courses to copy two different course GUIDs.
 ## Create admission
 
 Send POST /api/admissions with studentId, academicYear and two courseIds.
+
+## Watch expression one
+
+Watch dbContext.GetType().Name to identify the runtime AppDbContext implementation.
