@@ -22,3 +22,7 @@ Set a breakpoint inside the Create method of Api/Features/Admissions/AdmissionEn
 ## Breakpoint B
 
 Set a breakpoint at the beginning of CreateAdmissionCommandHandler.HandleAsync.
+
+## Breakpoint C
+
+Pause at dbContext.Admissions.Add(admission) and inspect admission.Id and admission.AdmissionCourses.Count.
