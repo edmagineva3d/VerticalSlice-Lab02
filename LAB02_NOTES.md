@@ -78,3 +78,7 @@ Api/Program.cs registers the GetAllAdmissionsQueryHandler for the matching query
 ## Scalar test
 
 Run dotnet run --project Api, open /scalar/v1, and send GET /api/admissions.
+
+## Expected response
+
+The admissions array should contain studentName and courseCount for saved admissions.
