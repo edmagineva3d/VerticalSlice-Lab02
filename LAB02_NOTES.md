@@ -54,3 +54,7 @@ Watch admission.Id before and after saving the admission.
 ## Watch expression three
 
 Watch admission.AdmissionCourses.Count to confirm both selected courses are included.
+
+## Query record
+
+GetAllAdmissionsQuery lives in Application/Features/Admissions/GetAllAdmissions and represents a read operation.
