@@ -106,3 +106,7 @@ Capture admission.Id as the empty GUID before saving at breakpoint C.
 ## Screenshot 3
 
 Capture the assigned admission.Id after saving at breakpoint D.
+
+## Screenshot 4
+
+Capture the GET /api/admissions Scalar response with studentName and courseCount.
