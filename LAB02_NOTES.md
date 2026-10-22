@@ -34,3 +34,7 @@ Pause after SaveChangesAsync and inspect admission.Id again.
 ## Student lookup
 
 Use GET /api/students in Scalar to copy a valid student GUID.
+
+## Course lookup
+
+Use GET /api/courses to copy two different course GUIDs.
