@@ -98,3 +98,7 @@ Check that the README lists GET /api/admissions alongside the existing admission
 ## Screenshot 1
 
 Capture the command already bound at breakpoint A with AcademicYear visible.
+
+## Screenshot 2
+
+Capture admission.Id as the empty GUID before saving at breakpoint C.
