@@ -30,3 +30,7 @@ Pause at dbContext.Admissions.Add(admission) and inspect admission.Id and admiss
 ## Breakpoint D
 
 Pause after SaveChangesAsync and inspect admission.Id again.
+
+## Student lookup
+
+Use GET /api/students in Scalar to copy a valid student GUID.
