@@ -74,3 +74,7 @@ GET /api/admissions is mapped in Api/Features/Admissions/AdmissionEndpoints.cs.
 ## Dependency injection
 
 Api/Program.cs registers the GetAllAdmissionsQueryHandler for the matching query handler interface.
+
+## Scalar test
+
+Run dotnet run --project Api, open /scalar/v1, and send GET /api/admissions.
