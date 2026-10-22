@@ -26,3 +26,7 @@ Set a breakpoint at the beginning of CreateAdmissionCommandHandler.HandleAsync.
 ## Breakpoint C
 
 Pause at dbContext.Admissions.Add(admission) and inspect admission.Id and admission.AdmissionCourses.Count.
+
+## Breakpoint D
+
+Pause after SaveChangesAsync and inspect admission.Id again.
