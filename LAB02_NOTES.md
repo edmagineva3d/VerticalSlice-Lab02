@@ -50,3 +50,7 @@ Watch dbContext.GetType().Name to identify the runtime AppDbContext implementati
 ## Watch expression two
 
 Watch admission.Id before and after saving the admission.
+
+## Watch expression three
+
+Watch admission.AdmissionCourses.Count to confirm both selected courses are included.
