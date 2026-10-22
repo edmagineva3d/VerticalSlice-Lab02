@@ -18,3 +18,7 @@ Open VerticalSlice.slnx, select Api as the startup project, and launch the debug
 ## Breakpoint A
 
 Set a breakpoint inside the Create method of Api/Features/Admissions/AdmissionEndpoints.cs.
+
+## Breakpoint B
+
+Set a breakpoint at the beginning of CreateAdmissionCommandHandler.HandleAsync.
