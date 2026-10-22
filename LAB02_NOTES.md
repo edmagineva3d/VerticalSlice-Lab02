@@ -102,3 +102,7 @@ Capture the command already bound at breakpoint A with AcademicYear visible.
 ## Screenshot 2
 
 Capture admission.Id as the empty GUID before saving at breakpoint C.
+
+## Screenshot 3
+
+Capture the assigned admission.Id after saving at breakpoint D.
