@@ -13,6 +13,7 @@ public sealed class GetAllAdmissionsQueryHandler(IAppDbContext dbContext)
         CancellationToken cancellationToken = default)
     {
         var admissions = await dbContext.Admissions
+            .AsNoTracking()
             .Select(a => new AdmissionSummaryResponse(
                 a.Id,
                 a.StudentId,
