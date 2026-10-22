@@ -90,3 +90,7 @@ Temporarily comment out the registration and restart to observe the dependency i
 ## Restore registration
 
 Keep the registration enabled in the final submission so the endpoint runs normally.
+
+## README check
+
+Check that the README lists GET /api/admissions alongside the existing admission routes.
