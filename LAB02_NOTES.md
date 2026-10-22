@@ -14,3 +14,7 @@ The HTTP request enters Api, calls the Application handler, uses the Infrastruct
 ## Debugger setup
 
 Open VerticalSlice.slnx, select Api as the startup project, and launch the debugger with F5.
+
+## Breakpoint A
+
+Set a breakpoint inside the Create method of Api/Features/Admissions/AdmissionEndpoints.cs.
