@@ -62,3 +62,7 @@ GetAllAdmissionsQuery lives in Application/Features/Admissions/GetAllAdmissions 
 ## Response model
 
 The admission summary includes Id, StudentId, StudentName, AcademicYear, AdmissionDate and CourseCount.
+
+## Query handler
+
+GetAllAdmissionsQueryHandler uses IAppDbContext to read and project admissions.
