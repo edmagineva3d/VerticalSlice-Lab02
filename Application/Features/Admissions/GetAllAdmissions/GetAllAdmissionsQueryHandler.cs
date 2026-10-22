@@ -21,6 +21,7 @@ public sealed class GetAllAdmissionsQueryHandler(IAppDbContext dbContext)
                 a.AcademicYear,
                 a.AdmissionDate,
                 a.AdmissionCourses.Count))
+            .OrderBy(a => a.AdmissionDate)
             .ToListAsync(cancellationToken);
 
         return Result<GetAllAdmissionsResponse>.Success(
