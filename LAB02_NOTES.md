@@ -66,3 +66,7 @@ The admission summary includes Id, StudentId, StudentName, AcademicYear, Admissi
 ## Query handler
 
 GetAllAdmissionsQueryHandler uses IAppDbContext to read and project admissions.
+
+## Endpoint mapping
+
+GET /api/admissions is mapped in Api/Features/Admissions/AdmissionEndpoints.cs.
