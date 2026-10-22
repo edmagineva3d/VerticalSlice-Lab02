@@ -38,3 +38,7 @@ Use GET /api/students in Scalar to copy a valid student GUID.
 ## Course lookup
 
 Use GET /api/courses to copy two different course GUIDs.
+
+## Create admission
+
+Send POST /api/admissions with studentId, academicYear and two courseIds.
