@@ -1,300 +1,113 @@
-# Vertical Slice Architecture — Student Management API
+# Lab 02 – Trace a Request and Add an Endpoint
 
-A simple API demonstrating Vertical Slice Architecture in .NET 10, built for educational purposes.
+## Overview
 
----
+This project is part of our laboratory activities in API Backend Development. In this activity, I learned how an HTTP request moves through the different layers of a Vertical Slice Architecture and how to create a new API endpoint.
 
-## Tech Stack
+The main purpose of Lab 02 is to trace an admission request using breakpoints, understand how data is saved to the database, and implement a new `GET /api/admissions` endpoint.
 
-| Component      | Technology                          |
-| -------------- | ----------------------------------- |
-| Framework      | .NET 10                             |
-| Architecture   | Vertical Slice + Clean Architecture |
-| ORM            | EF Core 10                          |
-| Database       | InMemory (for demo)                 |
-| Validation     | FluentValidation                    |
-| CQRS           | Custom ICommand/IQuery (No MediatR) |
-| API Docs       | Scalar (No Swashbuckle)             |
-| Result Pattern | Domain.Common.Result\<T\>           |
+This project uses the original Vertical Slice Architecture template provided by our instructor, **Elvin Manuel R. Luces, MIT**.
 
----
+## Technologies Used
+
+- C# and .NET
+- ASP.NET Core Web API
+- Entity Framework Core
+- Vertical Slice Architecture
+- Scalar API Documentation
+- Visual Studio / Visual Studio Code
+- Git and GitHub
 
 ## Project Structure
 
+The project follows four main layers:
 
-VerticalSlice-Edma/
-├── VerticalSlice-Edma.slnx
-├── Domain/                          # Entities (ZERO dependencies)
-│   ├── Common/
-│   │   ├── BaseEntity.cs           # Base class with Guid Id
-│   │   └── Result.cs               # Result<T> pattern
-│   └── Entities/
-│       ├── Student.cs
-│       ├── Course.cs
-│       ├── Admission.cs
-│       └── AdmissionCourse.cs
-├── Application/                     # Handlers, Validators, Abstractions
-│   ├── Abstractions/
-│   │   ├── Data/
-│   │   │   └── IAppDbContext.cs    # Database abstraction
-│   │   └── Messaging/
-│   │       ├── ICommand.cs         # Write operations interface
-│   │       ├── ICommandHandler.cs  # Command handler interface
-│   │       ├── IQuery.cs           # Read operations interface
-│   │       └── IQueryHandler.cs    # Query handler interface
-│   └── Features/
-│       ├── Students/
-│       │   ├── CreateStudent/
-│       │   │   ├── CreateStudentCommand.cs
-│       │   │   ├── CreateStudentCommandHandler.cs
-│       │   │   ├── CreateStudentValidator.cs
-│       │   │   └── CreateStudentResponse.cs
-│       │   └── GetStudentById/
-│       │       ├── GetStudentByIdQuery.cs
-│       │       ├── GetStudentByIdQueryHandler.cs
-│       │       └── GetStudentByIdResponse.cs
-│       ├── Courses/
-│       │   ├── CreateCourse/
-│       │   │   ├── CreateCourseCommand.cs
-│       │   │   ├── CreateCourseCommandHandler.cs
-│       │   │   ├── CreateCourseValidator.cs
-│       │   │   └── CreateCourseResponse.cs
-│       │   └── GetCourseById/
-│       │       ├── GetCourseByIdQuery.cs
-│       │       ├── GetCourseByIdQueryHandler.cs
-│       │       └── GetCourseByIdResponse.cs
-│       └── Admissions/
-│           ├── CreateAdmission/
-│           │   ├── CreateAdmissionCommand.cs
-│           │   ├── CreateAdmissionCommandHandler.cs
-│           │   ├── CreateAdmissionValidator.cs
-│           │   └── CreateAdmissionResponse.cs
-│           ├── GetAdmissionById/
-│           │   ├── GetAdmissionByIdQuery.cs
-│           │   ├── GetAdmissionByIdQueryHandler.cs
-│           │   └── GetAdmissionByIdResponse.cs
-│           └── GetAllAdmissions/
-│               ├── GetAllAdmissionsQuery.cs
-│               └── GetAllAdmissionsQueryHandler.cs
-├── Infrastructure/                  # EF Core, Persistence
-│   └── Persistence/
-│       └── AppDbContext.cs         # EF Core context
-└── Api/                             # Endpoints, DI, Extensions
-    ├── Features/
-    │   ├── Students/
-    │   │   └── StudentEndpoints.cs
-    │   ├── Courses/
-    │   │   └── CourseEndpoints.cs
-    │   └── Admissions/
-    │       └── AdmissionEndpoints.cs
-    ├── Common/
-    │   └── Extensions/
-    │       └── ResultExtensions.cs
-    └── Program.cs
+1. **Api** – Handles HTTP requests, API endpoints, and responses.
+2. **Application** – Contains commands, queries, handlers, and application logic.
+3. **Domain** – Contains entities and common result classes.
+4. **Infrastructure** – Handles database operations and data access.
 
+## Features and Activities
 
----
+1. Traced an HTTP request through the different project layers.
+2. Set four breakpoints to observe the admission creation process.
+3. Used the debugger's Watch window to inspect variables.
+4. Checked the admission ID before saving to the database.
+5. Observed how the admission ID changes after saving.
+6. Created the `GetAllAdmissionsQuery` and response records.
+7. Implemented the `GetAllAdmissionsQueryHandler`.
+8. Added the `GET /api/admissions` endpoint.
+9. Registered the new query handler using dependency injection.
+10. Tested the new endpoint using Scalar.
+11. Checked the returned student name and course count.
+12. Learned how queries and handlers work in Vertical Slice Architecture.
 
-## Getting Started
+## API Endpoint
 
-### Prerequisites
+### GET /api/admissions
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
-- IDE: Visual Studio 2022, VS Code with C# extension, or JetBrains Rider
+This endpoint retrieves the list of admissions stored in the database.
 
-### Installation
+Each admission contains:
 
-1. Clone the repository or navigate to the project folder:
+- Admission ID
+- Student ID
+- Student Name
+- Academic Year
+- Admission Date
+- Course Count
 
-   bash
-   cd VerticalSlice-Edma
-   
+## How to Run the Project
 
-2. Restore dependencies:
+**1. Restore the project dependencies**
 
-   bash
-   dotnet restore
-   
-
-3. Run the API:
-
-   bash
-   dotnet run --project Api
-   
-
-4. Open Scalar UI in your browser:
-  
-   https://localhost:5205/scalar/v1
-   
-
----
-
-## API Endpoints
-
-### Students
-
-| Method | Endpoint             | Description          | Request Body                                  |
-| ------ | -------------------- | -------------------- | --------------------------------------------- |
-| POST   | /api/students        | Create a new student | { firstName, lastName, email, dateOfBirth } |
-| GET    | /api/students/{id}   | Get student by ID    | —                                             |
-| GET    | /api/students        | Get all students     | —                                             |
-
-### Courses
-
-| Method | Endpoint             | Description         | Request Body               |
-| ------ | -------------------- | ------------------- | -------------------------- |
-| POST   | /api/courses         | Create a new course | { title, code, credits }   |
-| GET    | /api/courses/{id}    | Get course by ID    | —                          |
-| GET    | /api/courses         | Get all courses     | —                          |
-
-### Admissions
-
-| Method | Endpoint                | Description                      | Request Body                               |
-| ------ | ----------------------- | -------------------------------- | ------------------------------------------ |
-| POST   | /api/admissions         | Create admission with courses    | { studentId, academicYear, courseIds[] } |
-| GET    | /api/admissions/{id}    | Get admission by ID with courses | —                                          |
-| GET    | /api/admissions         | Get all admissions               | —                                          |
-
----
-
-## Example Requests
-
-### Create Student
-
-json
-POST /api/students
-{
-  "firstName": "John",
-  "lastName": "Santos",
-  "email": "john.doe@ccdi.com",
-  "dateOfBirth": "2000-01-15"
-}
+```bash
+dotnet restore
 ```
 
-### Create Course
+**2. Build the project**
 
-```json
-POST /api/courses
-{
-  "title": "Introduction to Programming",
-  "code": "CS101",
-  "credits": 3
-}
+```bash
+dotnet build
 ```
 
-### Create Admission
+**3. Run the API**
 
-```json
-POST /api/admissions
-{
-  "studentId": "YOUR_STUDENT_ID",
-  "academicYear": "2026-2027",
-  "courseIds": [
-    "COURSE_ID_1",
-    "COURSE_ID_2"
-  ]
-}
+```bash
+dotnet run --project Api
 ```
 
----
+**4. Open Scalar API Documentation**
 
-## Architecture Rules
+Open the following URL in your browser:
 
-1. **Domain has ZERO external dependencies**
-2. **All data access through DbContext** — No repository pattern
-3. **Result\<T\> for business errors** — Not exceptions
-4. **Records for DTOs** — Primary constructors for DI
-5. **Always pass CancellationToken** through async chains
-
----
-
-## Key Concepts
-
-### Vertical Slice Architecture
-
-Code is organized by feature (CreateStudent, GetCourseById), not by technical layer (Controllers, Services, Repositories). Each feature is self-contained in its own folder.
-
-### Result Pattern
-
-Instead of throwing exceptions, we return Result objects:
-
-```csharp
-// Success
-return Result<T>.Success(response);
-
-// Failure
-return Result<T>.Failure(Error.NotFound("Code", "Message"));
+```text
+http://localhost:5205/scalar/v1
 ```
 
-### Custom CQRS
+**5. Test the endpoint**
 
-Simple interfaces without external dependencies:
-
-- `ICommand<TResponse>` — for write operations
-- `IQuery<TResponse>` — for read operations
-- `ICommandHandler<TCommand, TResponse>` — handles commands
-- `IQueryHandler<TQuery, TResponse>` — handles queries
-
-### FluentValidation
-
-Validates input before it reaches the handler:
-
-```csharp
-public sealed class CreateStudentValidator : AbstractValidator<CreateStudentCommand>
-{
-    public CreateStudentValidator()
-    {
-        RuleFor(x => x.FirstName).NotEmpty().MaximumLength(100);
-        RuleFor(x => x.Email).NotEmpty().EmailAddress();
-    }
-}
+```http
+GET /api/admissions
 ```
 
----
+The endpoint should return a list of admissions with the student information and number of enrolled courses.
 
-## Seed Data
+## What I Learned
 
-The API automatically seeds the following data on startup:
+In this activity, I learned how to trace an API request using breakpoints and understand what happens before and after saving data to the database.
 
-**Students:**
+I also learned how to create a query, handler, and endpoint in their correct project layers. This helped me understand how Vertical Slice Architecture organizes API features and how dependency injection connects the different parts of the application.
 
-- John Doe (john.doe@example.com)
-- Jane Smith (jane.smith@example.com)
+## Credits and Acknowledgment
 
-**Courses:**
+The original Vertical Slice Architecture project template and laboratory activity guide were provided by our instructor, **Elvin Manuel R. Luces, MIT**, from **Computer Communication Development Institute (CCDI) – Sorsogon Campus**.
 
-- Introduction to Programming (CS101, 3 credits)
-- Data Structures (CS201, 4 credits)
-- Database Systems (CS301, 3 credits)
+All credits for the original project template and laboratory instructions belong to our instructor.
 
----
+This project was modified and completed as part of our laboratory requirements in API Backend Development.
 
-## Common Mistakes to Avoid
-
-1. **Don't use MediatR** — This project uses custom ICommand/IQuery
-2. **Don't throw exceptions** — Return Result.Failure() instead
-3. **Don't skip validation** — Always add a validator
-4. **Don't forget to register** — Add `app.Map{FeatureGroup}Endpoints()` in Program.cs
-5. **Don't put business logic in endpoints** — Handlers do the work
-6. **Don't use controllers** — This project uses Minimal APIs
-7. **Don't use Repository pattern** — Use DbContext directly
-
----
-
-## Resources
-
-- [Vertical Slice Architecture by Jimmy Bogard](https://www.jimmybogard.com/vertical-slice-architecture/)
-- [CodeWithMukesh Clean Architecture Template](https://github.com/iammukeshm/CleanArchitecture.WebApi)
-- [FluentValidation Documentation](https://docs.fluentvalidation.net/)
-- [Minimal APIs in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis)
-- [Scalar API Documentation](https://scalar.com/)
-
----
-
-## License
-
-This project is for educational purposes.
-
----
-
-**Developed by Elvin Manuel R. Luces, MIT**
+**Instructor:** Elvin Manuel R. Luces, MIT  
+**Institution:** Computer Communication Development Institute (CCDI)  
+**Campus:** Sorsogon Campus  
+**Course:** API Backend Development
