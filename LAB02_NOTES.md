@@ -70,3 +70,7 @@ GetAllAdmissionsQueryHandler uses IAppDbContext to read and project admissions.
 ## Endpoint mapping
 
 GET /api/admissions is mapped in Api/Features/Admissions/AdmissionEndpoints.cs.
+
+## Dependency injection
+
+Api/Program.cs registers the GetAllAdmissionsQueryHandler for the matching query handler interface.
