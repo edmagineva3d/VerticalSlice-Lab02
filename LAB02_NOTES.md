@@ -58,3 +58,7 @@ Watch admission.AdmissionCourses.Count to confirm both selected courses are incl
 ## Query record
 
 GetAllAdmissionsQuery lives in Application/Features/Admissions/GetAllAdmissions and represents a read operation.
+
+## Response model
+
+The admission summary includes Id, StudentId, StudentName, AcademicYear, AdmissionDate and CourseCount.
