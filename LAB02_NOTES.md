@@ -82,3 +82,7 @@ Run dotnet run --project Api, open /scalar/v1, and send GET /api/admissions.
 ## Expected response
 
 The admissions array should contain studentName and courseCount for saved admissions.
+
+## Missing registration test
+
+Temporarily comment out the registration and restart to observe the dependency injection error; restore the line afterward.
