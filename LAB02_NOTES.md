@@ -86,3 +86,7 @@ The admissions array should contain studentName and courseCount for saved admiss
 ## Missing registration test
 
 Temporarily comment out the registration and restart to observe the dependency injection error; restore the line afterward.
+
+## Restore registration
+
+Keep the registration enabled in the final submission so the endpoint runs normally.
