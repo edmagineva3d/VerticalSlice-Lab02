@@ -94,3 +94,7 @@ Keep the registration enabled in the final submission so the endpoint runs norma
 ## README check
 
 Check that the README lists GET /api/admissions alongside the existing admission routes.
+
+## Screenshot 1
+
+Capture the command already bound at breakpoint A with AcademicYear visible.
